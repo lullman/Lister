@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
 
   include BCrypt
 
+  has_many :lists
+
+  has_and_belongs_to_many :collaborations, class_name: "List", join_table: "collaborators"
+  
   def password
     @password ||= Password.new(password_hash)
   end
