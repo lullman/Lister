@@ -1,0 +1,21 @@
+<h1><%= @collaboration.list_name %></h1>
+
+<h2>List Items</h2>
+
+<table>
+  <th>
+    <td>Name</td>
+    <td>Link</td>
+    <td>Suggested By?</td>
+  </th>
+  <% @collaboration.items.each do |item| %>
+    <% if item.suggested_by.nil? || @collaboration.user_id != current_user.id %>
+      <tr>
+        <td><%= item.item_name %></td>
+        <td><%= item.url %></td>
+        <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
+        <td><%= "PURCHASED" if item.purchased %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
