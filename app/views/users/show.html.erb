@@ -22,7 +22,7 @@
   </th>
   <% @user.collaborations.each do |list| %>
     <tr>
-      <td><%= list.list_name %></td>
+      <td><%= link_to list.list_name, user_collaboration_path(user_id: @user.id, id: list.id) %></td>
       <td><%= list.list_type %></td>
     </tr>
   <% end %>

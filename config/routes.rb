@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :lists do
-    resources :items, only: [:index, :show, :create]
+    resources :items
   end
 
   get 'login' => 'sessions#new'

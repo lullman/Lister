@@ -1,0 +1,10 @@
+<h2>Add Items</h2>
+
+<%= form_for([list, @item]) do |f| %>
+  <%= f.label :item_name %>
+  <%= f.text_field :item_name %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.hidden_field :source, value: source %>
+  <%= f.submit %>
+<% end %>
