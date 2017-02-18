@@ -2,11 +2,11 @@
 <h2><%= @user %></h2>
 <h2><%= @user.username %></h2>
 <h2>Your Lists</h2>
-<table>
-  <th>
-    <td>List Name</td>
-    <td>List Type</td>
-  </th>
+<table class="table table-striped">
+  <tr>
+    <th>List Name</th>
+    <th>List Type</th>
+  </tr>
   <% @user.lists.each do |list| %>
     <tr>
       <td><%= link_to list.list_name, user_list_path(user_id: @user.id, id: list.id) %></td>
@@ -15,11 +15,11 @@
   <% end %>
 </table>
 <h2>Your Shared Lists</h2>
-<table>
-  <th>
-    <td>List Name</td>
-    <td>List Type</td>
-  </th>
+<table class="table table-striped">
+  <tr>
+    <th>List Name</th>
+    <th>List Type</th>
+  </tr>
   <% @user.collaborations.each do |list| %>
     <tr>
       <td><%= link_to list.list_name, user_collaboration_path(user_id: @user.id, id: list.id) %></td>

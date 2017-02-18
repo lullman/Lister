@@ -4,7 +4,17 @@
   <%= f.label :item_name %>
   <%= f.text_field :item_name %>
   <%= f.label :url %>
-  <%= f.text_field :url %>
+  <%= f.text_field :url %></br>
+  <% if source == 'list' %>
+    <%= f.check_box :redacted %>
+    <%= f.label :redacted, "Check to redact item (hide from other collaborators)" %></br>
+  <% end %>
+  <% if source == 'collaboration' %>
+    <%= f.label :visibility, "Visible To:" %></br>
+    <%= f.radio_button :visibility, 'everyone' %>Everyone</br>
+    <%= f.radio_button :visibility, 'collaborators' %>Collaborators Only (hidden from list owner)</br>
+    <%= f.radio_button :visibility, 'owner' %>List Owner Only (hidden from collaborators)</br>
+  <% end %>
   <%= f.hidden_field :source, value: source %>
   <%= f.submit %>
 <% end %>

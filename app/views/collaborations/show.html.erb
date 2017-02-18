@@ -2,18 +2,18 @@
 
 <h2>List Items</h2>
 
-<table>
-  <th>
-    <td>Name</td>
-    <td>Link</td>
-    <td>Suggested By?</td>
-  </th>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Suggested By?</th>
+  </tr>
   <% @collaboration.items.each do |item| %>
-    <% if item.suggested_by.nil? || @collaboration.user_id != current_user.id %>
-      <tr class="<%= item.redacted ? 'redacted' : 'visible' %>">
-        <td><%= item.redacted ? "XXXXX" : item.item_name %></td>
-        <td><%= item.redacted ? "XXXXX" : item.url %></td>
-        <td><%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
+    <% if item.suggested_by.nil? || item.visibility == 'everyone' || item.visibility == 'collaborators' || (item.visibility == 'owner' && item.suggested_by == current_user.id) # @collaboration.user_id != current_user.id %>
+      <tr>
+        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : item.item_name %></span></td>
+        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : item.url %></span></td>
+        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></span></td>
         <td><%= "PURCHASED" if item.purchased %></td>
       </tr>
     <% end %>

@@ -2,14 +2,14 @@
 
 <h2>List Items</h2>
 
-<table>
-  <th>
-    <td>Name</td>
-    <td>Link</td>
-    <td>Suggested By?</td>
-  </th>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Suggested By?</th>
+  </tr>
   <% @list.items.each do |item| %>
-    <% if item.suggested_by.nil? %>
+    <% if item.suggested_by.nil? || item.visibility == 'owner' || item.visibility == 'everyone' %>
       <tr>
         <td><%= item.item_name %></td>
         <td><%= item.url %></td>

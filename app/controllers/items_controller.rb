@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 private
 
   def item_params
-    params.require(:item).permit(:item_name, :url, :list_id)
+    params.require(:item).permit(:item_name, :url, :list_id, :redacted, :visibility)
   end
 
 
