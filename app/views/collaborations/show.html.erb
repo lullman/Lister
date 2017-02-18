@@ -10,10 +10,10 @@
   </th>
   <% @collaboration.items.each do |item| %>
     <% if item.suggested_by.nil? || @collaboration.user_id != current_user.id %>
-      <tr>
-        <td><%= item.item_name %></td>
-        <td><%= item.url %></td>
-        <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
+      <tr class="<%= item.redacted ? 'redacted' : 'visible' %>">
+        <td><%= item.redacted ? "XXXXX" : item.item_name %></td>
+        <td><%= item.redacted ? "XXXXX" : item.url %></td>
+        <td><%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
         <td><%= "PURCHASED" if item.purchased %></td>
       </tr>
     <% end %>
