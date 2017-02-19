@@ -15,6 +15,7 @@
         <td><%= item.url %></td>
         <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
         <td><%= "PURCHASED" if item.purchased %></td>
+        <td><%= item.vote_total %></td>
         <td><%= link_to "Remove", list_item_path(list_id: @list.id, id: item.id), method: :delete %></td>
       </tr>
     <% end %>
