@@ -13,9 +13,20 @@ class ListsController < ApplicationController
   end
   
   def new
+    @list = List.new(user_id: params[:user_id])
+  end
+
+  def edit
+    @list = List.find(params[:id])
   end
 
   def create
+    list = List.new(list_params)
+    if list.save
+      redirect_to list
+    else
+      redirect_to new_user_list_path(user_id: current_user)
+    end
   end
 
   def update
@@ -29,7 +40,17 @@ class ListsController < ApplicationController
       p "Adding Collaborator"
       list.collaborators << current_user
       redirect_to user_collaboration_path(user_id: current_user, id: list.id)
+    else
+      list.update(list_params)
+      redirect_to list
     end
   end
+
+  private
+
+    def list_params
+      params.require(:list).permit(:user_id, :list_name, :list_type, :public)
+    end
+
 
 end

@@ -1,0 +1,14 @@
+<%= form_for @list do |f| %>
+  <%= f.label :list_name %>
+  <%= f.text_field :list_name %></br>
+
+  <%= f.label :list_type %>
+  <%= f.collection_select :list_type, ListType.all, :list_type, :list_type %></br>
+
+  <%= f.label :public %>
+  <%= f.check_box :public %></br>
+
+  <%= f.hidden_field :user_id %></br>
+
+  <%= f.submit %>
+<% end %>

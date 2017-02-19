@@ -27,6 +27,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    list = item.list
+    item.delete
+    redirect_to list
+  end 
+
 
 private
 

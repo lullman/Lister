@@ -1,5 +1,5 @@
 <h1><%= @list.list_name %></h1>
-
+<%= link_to "Edit List", edit_list_path(@list) %>
 <h2>List Items</h2>
 
 <table class="table table-striped">
@@ -15,9 +15,10 @@
         <td><%= item.url %></td>
         <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
         <td><%= "PURCHASED" if item.purchased %></td>
+        <td><%= link_to "Remove", list_item_path(list_id: @list.id, id: item.id), method: :delete %></td>
       </tr>
     <% end %>
   <% end %>
 </table>
 
-<%= render partial: 'items/new', locals: {list: @list, source: 'list' } %>
+<%= render partial: 'items/form', locals: {list: @list, source: 'list' } %>

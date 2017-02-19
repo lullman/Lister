@@ -11,13 +11,26 @@
   <% @collaboration.items.each do |item| %>
     <% if item.suggested_by.nil? || item.visibility == 'everyone' || item.visibility == 'collaborators' || (item.visibility == 'owner' && item.suggested_by == current_user.id) # @collaboration.user_id != current_user.id %>
       <tr>
-        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : item.item_name %></span></td>
-        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : item.url %></span></td>
-        <td><span class="<%= item.redacted ? 'redacted' : 'visible' %>"><%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></span></td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : item.item_name %>
+          </span>
+        </td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : item.url %>
+          </span>
+        </td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %>
+          </span>
+        </td>
         <td><%= "PURCHASED" if item.purchased %></td>
+        <td><%= link_to "Remove", list_item_path(list_id: @collaboration.id, id: item.id), method: :delete if false == true %></td>
       </tr>
     <% end %>
   <% end %>
 </table>
 
-<%= render partial: 'items/new', locals: {list: @collaboration, source: 'collaboration' } %>
+<%= render partial: 'items/form', locals: {list: @collaboration, source: 'collaboration' } %>
