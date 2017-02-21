@@ -7,14 +7,15 @@
     <th>Name</th>
     <th>Link</th>
     <th>Suggested By?</th>
+    <th>Vote Total</th>
+    <th></th>
   </tr>
   <% @list.items.each do |item| %>
     <% if item.suggested_by.nil? || item.visibility == 'owner' || item.visibility == 'everyone' %>
       <tr>
         <td><%= item.item_name %></td>
-        <td><%= item.url %></td>
+        <td><%= link_to("Item Details", item.url) unless item.url.nil? || item.url == "" %></td>
         <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
-        <td><%= "PURCHASED" if item.purchased %></td>
         <td><%= item.vote_total %></td>
         <td><%= link_to "Remove", list_item_path(list_id: @list.id, id: item.id), method: :delete %></td>
       </tr>

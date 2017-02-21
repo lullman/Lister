@@ -7,6 +7,8 @@
     <th>Name</th>
     <th>Link</th>
     <th>Suggested By?</th>
+    <th>Vote Total</th>
+    <th></th>
   </tr>
   <% @collaboration.items.each do |item| %>
     <% if item.suggested_by.nil? || item.visibility == 'everyone' || item.visibility == 'collaborators' || (item.visibility == 'owner' && item.suggested_by == current_user.id) # @collaboration.user_id != current_user.id %>
@@ -18,7 +20,7 @@
         </td>
         <td>
           <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
-            <%= item.redacted ? "XXXXX" : item.url %>
+            <%= item.redacted ? "XXXXX" : link_to("Item Details", item.url) unless item.url.nil? || item.url == "" %>
           </span>
         </td>
         <td>
@@ -26,8 +28,10 @@
             <%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %>
           </span>
         </td>
-        <td><%= "PURCHASED" if item.purchased %></td>
-        <td><%= link_to "Remove", list_item_path(list_id: @collaboration.id, id: item.id), method: :delete if false == true %></td>
+        <td><%= item.vote_total %></td>
+        <td>
+          <%= link_to "Remove", list_item_path(list_id: @collaboration.id, id: item.id), method: :delete if item.suggested_by == current_user.id %>
+        </td>
       </tr>
     <% end %>
   <% end %>
