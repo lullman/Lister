@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :items
   end
 
+  get 'lists/:id/randomize' => 'lists#random_item', as: 'list_item_random'
+
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

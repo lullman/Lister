@@ -1,6 +1,7 @@
 <h1><%= @collaboration.list_name %></h1>
 
 <h2>List Items</h2>
+<%= link_to "RANDOM ITEM", list_item_random_path(id: @collaboration.id), class: "btn btn-primary" %>
 
 <table class="table table-striped">
   <tr>

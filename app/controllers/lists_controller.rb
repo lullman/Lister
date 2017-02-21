@@ -46,6 +46,10 @@ class ListsController < ApplicationController
     end
   end
 
+  def random_item
+    redirect_to list_item_path(list_id: params[:id], id: List.find(params[:id]).items.sample)
+  end
+
   private
 
     def list_params
