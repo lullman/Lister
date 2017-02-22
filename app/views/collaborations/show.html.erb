@@ -1,0 +1,41 @@
+<h1><%= @collaboration.list_name %></h1>
+
+<h2>List Items</h2>
+<%= link_to "RANDOM ITEM", list_item_random_path(id: @collaboration.id), class: "btn btn-primary" %>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Suggested By?</th>
+    <th>Vote Total</th>
+    <th></th>
+  </tr>
+  <% @collaboration.items.each do |item| %>
+    <% if item.suggested_by.nil? || item.visibility == 'everyone' || item.visibility == 'collaborators' || (item.visibility == 'owner' && item.suggested_by == current_user.id) # @collaboration.user_id != current_user.id %>
+      <tr>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : item.item_name %>
+          </span>
+        </td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : link_to("Item Details", item.url) unless item.url.nil? || item.url == "" %>
+          </span>
+        </td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : User.find(item.suggested_by).first_name unless item.suggested_by.nil? %>
+          </span>
+        </td>
+        <td><%= item.vote_total %></td>
+        <td>
+          <%= link_to "Remove", list_item_path(list_id: @collaboration.id, id: item.id), method: :delete if item.suggested_by == current_user.id %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= render partial: 'items/form', locals: {list: @collaboration, source: 'collaboration' } %>

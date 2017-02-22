@@ -1,0 +1,16 @@
+<h2>Browse Public Lists</h2>
+<table class="table table-striped">
+  <tr>
+    <th>List Name</th>
+    <th>List Owner</th>
+  </tr>
+  <% @lists.each do |list| %>
+    <% if list.public == true && list.user != current_user %>
+      <tr>
+        <td><%= list.list_name %></td>
+        <td><%= list.user.first_name %></td>
+        <td><%= render partial: 'collaborations/new', locals: { list: list } unless list.collaborators.include? current_user %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

@@ -1,0 +1,31 @@
+<h2><%= "Welcome, #{@user.first_name}" %></h2>
+<h2>Your Lists</h2>
+<table class="table table-striped">
+  <tr>
+    <th>List Name</th>
+    <th>List Type</th>
+  </tr>
+  <% @user.lists.each do |list| %>
+    <tr>
+      <td><%= link_to list.list_name, user_list_path(user_id: @user.id, id: list.id) %></td>
+      <td><%= list.list_type %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to "(Create a new list)", new_user_list_path(user_id: @user.id) %>
+<h2>Your Shared Lists</h2>
+<table class="table table-striped">
+  <tr>
+    <th>List Name</th>
+    <th>List Type</th>
+    <th>Owner</th>
+  </tr>
+  <% @user.collaborations.each do |list| %>
+    <tr>
+      <td><%= link_to list.list_name, user_collaboration_path(user_id: @user.id, id: list.id) %></td>
+      <td><%= list.list_type %></td>
+      <td><%= list.user.first_name %></td>
+    </tr>
+  <% end %>
+</table>
+    <%= link_to "(Find more public lists)", lists_path %>
