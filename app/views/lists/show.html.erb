@@ -7,6 +7,7 @@
   <tr>
     <th>Name</th>
     <th>Link</th>
+    <th><%= "Location" if @list.list_type == "Restaurants" || @list.list_type == "Activities" %></th>
     <th>Suggested By?</th>
     <th>Vote Total</th>
     <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= item.item_name %></td>
         <td><%= link_to("Item Details", item.url) unless item.url.nil? || item.url == "" %></td>
+        <td><%= item.location if @list.list_type == "Restaurants" || @list.list_type == "Activities" %></td>
         <td><%= User.find(item.suggested_by).first_name unless item.suggested_by.nil? %></td>
         <td><%= item.vote_total %></td>
         <td><%= link_to "Remove", list_item_path(list_id: @list.id, id: item.id), method: :delete %></td>

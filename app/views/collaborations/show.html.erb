@@ -7,6 +7,7 @@
   <tr>
     <th>Name</th>
     <th>Link</th>
+    <th><%= "Location" if @collaboration.list_type == "Restaurants" || @collaboration.list_type == "Activities" %></th>
     <th>Suggested By?</th>
     <th>Vote Total</th>
     <th></th>
@@ -23,6 +24,11 @@
           <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
             <%= item.redacted ? "XXXXX" : link_to("Item Details", item.url) unless item.url.nil? || item.url == "" %>
           </span>
+        </td>
+        <td>
+          <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
+            <%= item.redacted ? "XXXXX" : item.location if @collaboration.list_type == "Restaurants" || @collaboration.list_type == "Activities" %>
+            </span>
         </td>
         <td>
           <span class="<%= item.redacted ? 'redacted' : 'visible' %>">
