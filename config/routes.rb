@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :items
   end
 
+  resources :friendships, only: [:create, :update, :destroy]
+
   get 'lists/:id/randomize' => 'lists#random_item', as: 'list_item_random'
 
   get 'login' => 'sessions#new'

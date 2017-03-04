@@ -31,7 +31,14 @@
             <!-- <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
              -->
-             <li class="active"><%= link_to "Browse Lists", lists_path %></li>
+             <% if logged_in? %>
+               <li class="active"><%= link_to "Browse Lists", lists_path %></li>
+               <li class="active"><%= link_to users_path do %>
+                <%= "Make Friends! " %>
+                <span class="badge"><%= logged_in? && current_user.requested_friendships.count > 0 ? current_user.requested_friendships.count : nil %></span>
+              <% end %>
+              </li>
+            <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user.nil? %>
