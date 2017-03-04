@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 
   def index
-    @lists = List.all
+    @lists = List.where(user_id: [current_user.friends])
   end
 
   def show
