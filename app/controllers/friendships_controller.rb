@@ -2,6 +2,10 @@ class FriendshipsController < ApplicationController
 
   def create
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
+    if params[:friend_id] == "1"
+      @friendship.accepted = true
+    end
+
     if @friendship.save
       flash[:success] = "Friend Requested"
       redirect_to :back
