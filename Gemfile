@@ -38,6 +38,15 @@ group :development, :test do
   gem 'hirb'
   gem 'faker', '~> 1.6.6'
   gem 'listen'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :development do
