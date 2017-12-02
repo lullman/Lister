@@ -1,12 +1,15 @@
 class RootController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     p "*" * 25
     p "Root Controller :: Index"
-    p "Logged In: #{logged_in?}"
+    p "User: #{current_user}"
+    p "Logged In: #{user_signed_in?}"
     p "*" * 25
     
-    if logged_in?
+    if user_signed_in?
       redirect_to current_user
     end
   end

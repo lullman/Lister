@@ -15,10 +15,17 @@ Rails.application.routes.draw do
 
   get 'lists/:id/randomize' => 'lists#random_item', as: 'list_item_random'
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
-  get 'logout' => 'sessions#destroy'
+  # get 'login' => 'sessions#new'
+  # post 'login' => 'sessions#create'
+  # delete 'logout' => 'sessions#destroy'
+  # get 'logout' => 'sessions#destroy'
+
+  devise_scope :user do 
+    get 'login', to: 'devise/sessions#new'
+    delete 'logout', to: 'devise/sessions#destroy'
+  end
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
