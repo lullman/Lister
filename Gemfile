@@ -42,6 +42,7 @@ group :development, :test do
   gem 'listen'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'dotenv-rails'
 end
 
 group :test do

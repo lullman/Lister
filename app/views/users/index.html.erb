@@ -7,10 +7,12 @@
         <th class="col-md-2"></th>
       </tr>
       <% @users.each do |user| %>
-        <tr>
-          <td><%= "#{user.first_name} #{user.last_name}" %></td>
-          <td><%= link_to "Add Friend", friendships_path(friend_id: user), method: :post %></td>
-        </tr>
+        <% if user != current_user %>
+          <tr>
+            <td><%= "#{user.first_name} #{user.last_name}" %></td>
+            <td><%= link_to "Add Friend", friendships_path(friend_id: user), method: :post %></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>
